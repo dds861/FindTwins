@@ -22,6 +22,7 @@
             android:textColor="@color/primary_text" />
 
         <TextView
+            android:id="@+id/player1Score"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -32,6 +33,7 @@
 
 
         <TextView
+            android:id="@+id/player2Score"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

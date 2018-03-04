@@ -54,16 +54,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView m40Cell;
     private TextView m41Cell;
     private TextView m42Cell;
+    private TextView mPlayer1Score;
+    private TextView mPlayer2Score;
 
     ArrayList<Integer> randomNumbersArrayList = new ArrayList<>();
 
     int openCard = 0;
 
     String randomNumber1;
-    String randomNumber2;
+
 
     TextView textView1;
-    TextView textView2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -281,44 +283,65 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         m41Cell.setOnClickListener(this);
         m42Cell = (TextView) findViewById(R.id.cell_42);
         m42Cell.setOnClickListener(this);
+        mPlayer1Score = (TextView) findViewById(R.id.player1Score);
+        mPlayer2Score = (TextView) findViewById(R.id.player2Score);
+
     }
 
     private void showAndHideCells(final TextView mCell, int position) {
 
+        //Получаем из списка сгенерированных ответов значение соответвующее нажатой ячейке
         String randomNumber = String.valueOf(randomNumbersArrayList.get(position));
 
+        //Проверяем пустая ли ячейка, если ранее были уже открыты цифры, прерываем дальнейшее исполнение кода
+        if (!mCell.getText().toString().equals("")) {
+            return;
+        }
+
+        //открываем ячейку т.е. присваем ей значение
         mCell.setText(randomNumber);
 
-        //Проверяем открывалась ли ранее ячейка
 
+        //Проверяем, мы открыли первую ячейку или вторую
         if (openCard == 1) {
+
+            //если открыли вторую ячейку, обнуляем счетчик открытия ячеек, потому что теперь открылись 2 ячейки.
             openCard = 0;
 
-            randomNumber2 = randomNumber;
+            //если открылись 2 ячейки проверяем одинаковые ли они
+            if (randomNumber1.equals(randomNumber)) {
 
-            //если открывалась тогда проверяем одинаковые ли 2 ячейки
-            if (randomNumber1.equals(randomNumber2)) {
+                //
 
-                //если одинаковые тогда оставляем их открытыми и далее ничего не делаем
+                //если одинаковые тогда оставляем их открытыми, не трогаем и прерываем дальнейшее исполнение кода
                 return;
             }
 
-            textView2 = mCell;
-
-            //задерживать перед закрытием карт
+            //далее надо сделать пустыми ячейки если они не совпали
+            //делаем маленькую паузу после того как открыли вторую ячеку и убедились что 2 ячейки разные
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    textView2.setText("");
+
+                    //1 ячейке присваем пустое значение, потому что разная от 2 ячейки
                     textView1.setText("");
+
+                    //2 ячейке присваем пустое значение, потому что разная от 1 ячейки
+                    mCell.setText("");
                 }
             }, 100);
 
 
         } else {
+
+            //если открыли первую ячейку, тогда увеличиваем счетчик на 1 единицу
             openCard += 1;
+
+            //далее сохраняем в глобальное переменную значение первой ячейки
             randomNumber1 = randomNumber;
+
+            //и сохраняем в глобальную переменную ссылку на первый Textview т.е. первую открытую ячейку
             textView1 = mCell;
 
         }
@@ -347,159 +370,159 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.cell_4:
                 // TODO 18/03/01
-                showAndHideCells(m4Cell,3);
+                showAndHideCells(m4Cell, 3);
                 break;
             case R.id.cell_5:
                 // TODO 18/03/01
-                showAndHideCells(m5Cell,4);
+                showAndHideCells(m5Cell, 4);
                 break;
             case R.id.cell_6:
                 // TODO 18/03/01
-                showAndHideCells(m6Cell,5);
+                showAndHideCells(m6Cell, 5);
                 break;
             case R.id.cell_7:
                 // TODO 18/03/01
-                showAndHideCells(m7Cell,6);
+                showAndHideCells(m7Cell, 6);
                 break;
             case R.id.cell_8:
                 // TODO 18/03/01
-                showAndHideCells(m8Cell,7);
+                showAndHideCells(m8Cell, 7);
                 break;
             case R.id.cell_9:
                 // TODO 18/03/01
-                showAndHideCells(m9Cell,8);
+                showAndHideCells(m9Cell, 8);
                 break;
             case R.id.cell_10:
                 // TODO 18/03/01
-                showAndHideCells(m10Cell,9);
+                showAndHideCells(m10Cell, 9);
                 break;
             case R.id.cell_11:
                 // TODO 18/03/01
-                showAndHideCells(m11Cell,10);
+                showAndHideCells(m11Cell, 10);
                 break;
             case R.id.cell_12:
                 // TODO 18/03/01
-                showAndHideCells(m12Cell,11);
+                showAndHideCells(m12Cell, 11);
                 break;
             case R.id.cell_13:
                 // TODO 18/03/01
-                showAndHideCells(m13Cell,12);
+                showAndHideCells(m13Cell, 12);
                 break;
             case R.id.cell_14:
                 // TODO 18/03/01
-                showAndHideCells(m14Cell,13);
+                showAndHideCells(m14Cell, 13);
                 break;
             case R.id.cell_15:
                 // TODO 18/03/01
-                showAndHideCells(m15Cell,14);
+                showAndHideCells(m15Cell, 14);
                 break;
             case R.id.cell_16:
                 // TODO 18/03/01
-                showAndHideCells(m16Cell,15);
+                showAndHideCells(m16Cell, 15);
                 break;
             case R.id.cell_17:
                 // TODO 18/03/01
-                showAndHideCells(m17Cell,16);
+                showAndHideCells(m17Cell, 16);
                 break;
             case R.id.cell_18:
                 // TODO 18/03/01
-                showAndHideCells(m18Cell,17);
+                showAndHideCells(m18Cell, 17);
                 break;
             case R.id.cell_19:
                 // TODO 18/03/01
-                showAndHideCells(m19Cell,18);
+                showAndHideCells(m19Cell, 18);
                 break;
             case R.id.cell_20:
                 // TODO 18/03/01
-                showAndHideCells(m20Cell,19);
+                showAndHideCells(m20Cell, 19);
                 break;
             case R.id.cell_21:
                 // TODO 18/03/01
-                showAndHideCells(m21Cell,20);
+                showAndHideCells(m21Cell, 20);
                 break;
             case R.id.cell_22:
                 // TODO 18/03/01
-                showAndHideCells(m22Cell,21);
+                showAndHideCells(m22Cell, 21);
                 break;
             case R.id.cell_23:
                 // TODO 18/03/01
-                showAndHideCells(m23Cell,22);
+                showAndHideCells(m23Cell, 22);
                 break;
             case R.id.cell_24:
                 // TODO 18/03/01
-                showAndHideCells(m24Cell,23);
+                showAndHideCells(m24Cell, 23);
                 break;
             case R.id.cell_25:
                 // TODO 18/03/01
-                showAndHideCells(m25Cell,24);
+                showAndHideCells(m25Cell, 24);
                 break;
             case R.id.cell_26:
                 // TODO 18/03/01
-                showAndHideCells(m26Cell,25);
+                showAndHideCells(m26Cell, 25);
                 break;
             case R.id.cell_27:
                 // TODO 18/03/01
-                showAndHideCells(m27Cell,26);
+                showAndHideCells(m27Cell, 26);
                 break;
             case R.id.cell_28:
                 // TODO 18/03/01
-                showAndHideCells(m28Cell,27);
+                showAndHideCells(m28Cell, 27);
                 break;
             case R.id.cell_29:
                 // TODO 18/03/01
-                showAndHideCells(m29Cell,28);
+                showAndHideCells(m29Cell, 28);
                 break;
             case R.id.cell_30:
                 // TODO 18/03/01
-                showAndHideCells(m30Cell,29);
+                showAndHideCells(m30Cell, 29);
                 break;
             case R.id.cell_31:
                 // TODO 18/03/01
-                showAndHideCells(m31Cell,30);
+                showAndHideCells(m31Cell, 30);
                 break;
             case R.id.cell_32:
                 // TODO 18/03/01
-                showAndHideCells(m32Cell,31);
+                showAndHideCells(m32Cell, 31);
                 break;
             case R.id.cell_33:
                 // TODO 18/03/01
-                showAndHideCells(m33Cell,32);
+                showAndHideCells(m33Cell, 32);
                 break;
             case R.id.cell_34:
                 // TODO 18/03/01
-                showAndHideCells(m34Cell,33);
+                showAndHideCells(m34Cell, 33);
                 break;
             case R.id.cell_35:
                 // TODO 18/03/01
-                showAndHideCells(m35Cell,34);
+                showAndHideCells(m35Cell, 34);
                 break;
             case R.id.cell_36:
                 // TODO 18/03/01
-                showAndHideCells(m36Cell,35);
+                showAndHideCells(m36Cell, 35);
                 break;
             case R.id.cell_37:
                 // TODO 18/03/01
-                showAndHideCells(m37Cell,36);
+                showAndHideCells(m37Cell, 36);
                 break;
             case R.id.cell_38:
                 // TODO 18/03/01
-                showAndHideCells(m38Cell,37);
+                showAndHideCells(m38Cell, 37);
                 break;
             case R.id.cell_39:
                 // TODO 18/03/01
-                showAndHideCells(m39Cell,38);
+                showAndHideCells(m39Cell, 38);
                 break;
             case R.id.cell_40:
                 // TODO 18/03/01
-                showAndHideCells(m40Cell,39);
+                showAndHideCells(m40Cell, 39);
                 break;
             case R.id.cell_41:
                 // TODO 18/03/01
-                showAndHideCells(m41Cell,40);
+                showAndHideCells(m41Cell, 40);
                 break;
             case R.id.cell_42:
                 // TODO 18/03/01
-                showAndHideCells(m42Cell,41);
+                showAndHideCells(m42Cell, 41);
                 break;
             default:
                 break;
