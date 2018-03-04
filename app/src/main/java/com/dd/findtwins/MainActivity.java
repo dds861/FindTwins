@@ -60,11 +60,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ArrayList<Integer> randomNumbersArrayList = new ArrayList<>();
 
     int openCard = 0;
+    int openCard2 = 0;
 
     String randomNumber1;
 
-
     TextView textView1;
+
+    private int intPlayer1Score = 0;
+    private int intPlayer2Score = 0;
+    private int player1Move = 1;
+    private TextView mPlayer1Text;
+    private TextView mPlayer2Text;
 
 
     @Override
@@ -286,6 +292,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPlayer1Score = (TextView) findViewById(R.id.player1Score);
         mPlayer2Score = (TextView) findViewById(R.id.player2Score);
 
+        mPlayer1Text = (TextView) findViewById(R.id.player1Text);
+        mPlayer2Text = (TextView) findViewById(R.id.player2Text);
     }
 
     private void showAndHideCells(final TextView mCell, int position) {
@@ -305,13 +313,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Проверяем, мы открыли первую ячейку или вторую
         if (openCard == 1) {
 
+
             //если открыли вторую ячейку, обнуляем счетчик открытия ячеек, потому что теперь открылись 2 ячейки.
             openCard = 0;
+
 
             //если открылись 2 ячейки проверяем одинаковые ли они
             if (randomNumber1.equals(randomNumber)) {
 
-                //
+
+                //проверяем кто открыл 2 одинаковые ячейки
+                //если первый игрок то делаем следующее
+                if (player1Move == 1) {
+
+                    //если игрок 1 открыл 2 одинаковые ячейки тогда увеличиваем его счет
+                    intPlayer1Score++;
+
+                    //табло счета меняем
+                    mPlayer1Score.setText(String.valueOf(intPlayer1Score));
+
+                } else {
+
+                    //если игрок 2 открыл 2 одинаковые ячейки тогда увеличиваем его счет
+                    intPlayer2Score++;
+
+                    //табло счета меняем
+                    mPlayer2Score.setText(String.valueOf(intPlayer2Score));
+
+
+                }
 
                 //если одинаковые тогда оставляем их открытыми, не трогаем и прерываем дальнейшее исполнение кода
                 return;
@@ -332,8 +362,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }, 100);
 
+            //меняем цвет табличьки при ходе игроков
+            //если ходит 2 игрок тогда сделать следующее
+            if (player1Move == 0) {
+                //поменять цвет первого игрока
+                mPlayer1Text.setBackgroundColor(getResources().getColor(R.color.divider));
+
+                //поменять цвет второго игрока
+                mPlayer2Text.setBackgroundColor(0x00000000);
+
+                //дать очередь первого игроку на ход
+                player1Move = 1;
+
+            } else {
+                //поменять цвет первого игрока
+                mPlayer1Text.setBackgroundColor(0x00000000);
+
+                //поменять цвет второго игрока
+                mPlayer2Text.setBackgroundColor(getResources().getColor(R.color.divider));
+
+                //дать очередь второму игроку на ход
+                player1Move = 0;
+            }
 
         } else {
+
 
             //если открыли первую ячейку, тогда увеличиваем счетчик на 1 единицу
             openCard += 1;
