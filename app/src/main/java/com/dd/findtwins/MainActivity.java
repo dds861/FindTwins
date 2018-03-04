@@ -313,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     textView2.setText("");
                     textView1.setText("");
                 }
-            }, 1000);
+            }, 100);
 
 
         } else {
